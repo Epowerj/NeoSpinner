@@ -5,11 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 
 import io.anuke.ucore.core.Draw;
 import io.anuke.ucore.core.DrawContext;
 import io.anuke.ucore.core.Graphics;
+import io.anuke.ucore.util.Angles;
 //import io.anuke.ucore.graphics.Hue;
 
 public class NeoSpinner extends ApplicationAdapter {
@@ -27,6 +30,8 @@ public class NeoSpinner extends ApplicationAdapter {
 		
 		//Sets the vector graphics batch
 		DrawContext.batch = batch;
+		//set the drawcontext font
+		DrawContext.font = new BitmapFont(Gdx.files.internal("fonts/font.fnt"));
 		
 		//set player position to center of screen
 		playerx = Gdx.graphics.getWidth()/2;
@@ -86,9 +91,24 @@ public class NeoSpinner extends ApplicationAdapter {
 		//draw spikes around everything
 		Draw.spikes(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2f, 60f, 20f, 10, -time);
 		
+		int sides = 3;
+		
+		for(int i = 0; i < sides; i ++){
+			Angles.translation(i*360f/sides+time, 100);
+			Draw.circle(Gdx.graphics.getWidth()/2f + Angles.vector.x, Gdx.graphics.getHeight()/2f + Angles.vector.y, 60);
+		}
+		
 		batch.setColor(Color.WHITE);
 		
+		Draw.text(Gdx.graphics.getFramesPerSecond() + " FPS", 0, Gdx.graphics.getHeight(), Align.left);
+		
 		batch.end();
+	}
+	
+	@Override
+	public void resize(int width, int height){
+		//this resizes the batch so the image doesn't stretch
+		batch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
 	}
 	
 	@Override
