@@ -13,13 +13,13 @@ import io.anuke.ucore.core.Draw;
 import io.anuke.ucore.core.DrawContext;
 import io.anuke.ucore.core.Graphics;
 import io.anuke.ucore.util.Angles;
-//import io.anuke.ucore.graphics.Hue;
+import io.anuke.ucore.util.Mathf;
 
 public class NeoSpinner extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	
-	float speed = 3f;
+	float speed = 10f;
 	float playerx, playery;
 	float time;
 	
@@ -42,23 +42,23 @@ public class NeoSpinner extends ApplicationAdapter {
 	public void render () {
 		//input
 		if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)){
-			playery += speed;
+			playery += speed*Mathf.delta();
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)){
-			playerx -= speed;
+			playerx -= speed*Mathf.delta();
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)){
-			playery -= speed;
+			playery -= speed*Mathf.delta();
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)){
-			playerx += speed;
+			playerx += speed*Mathf.delta();
 		}
 		
-		//increment counter
-		time ++;
+		//increment counter (fps-independent)
+		time += Mathf.delta(); 
 		
 		//Graphics.clear(color) clears the screen
 		//Hue.fromHSB() creates a color from Hue, Saturation and Brightness values
