@@ -84,7 +84,7 @@ public class NeoSpinner extends ApplicationAdapter {
 		//draw 3-sided regular polygon
 		Draw.polygon(3, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2f, 50f);
 		//draw spikes around everything
-		Draw.spikes(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2f, 60f, 20f, 10, time);
+		Draw.spikes(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2f, 60f, 20f, 10, -time);
 		
 		batch.setColor(Color.WHITE);
 		
