@@ -36,19 +36,19 @@ public class NeoSpinner extends ApplicationAdapter {
 	@Override
 	public void render () {
 		//input
-		if(Gdx.input.isKeyPressed(Keys.W)){
+		if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)){
 			playery += speed;
 		}
 		
-		if(Gdx.input.isKeyPressed(Keys.A)){
+		if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)){
 			playerx -= speed;
 		}
 		
-		if(Gdx.input.isKeyPressed(Keys.S)){
+		if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)){
 			playery -= speed;
 		}
 		
-		if(Gdx.input.isKeyPressed(Keys.D)){
+		if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)){
 			playerx += speed;
 		}
 		
