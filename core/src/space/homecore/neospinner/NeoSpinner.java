@@ -58,7 +58,7 @@ public class NeoSpinner extends ApplicationAdapter {
 		}
 		
 		//increment counter (fps-independent)
-		time += Mathf.delta(); 
+		time += Mathf.delta();
 		
 		//Graphics.clear(color) clears the screen
 		//Hue.fromHSB() creates a color from Hue, Saturation and Brightness values
