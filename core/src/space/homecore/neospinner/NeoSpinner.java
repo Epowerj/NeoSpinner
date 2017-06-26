@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.anuke.ucore.core.Draw;
 import io.anuke.ucore.core.DrawContext;
 import io.anuke.ucore.core.Graphics;
-import io.anuke.ucore.graphics.Hue;
+//import io.anuke.ucore.graphics.Hue;
 
 public class NeoSpinner extends ApplicationAdapter {
 	SpriteBatch batch;
