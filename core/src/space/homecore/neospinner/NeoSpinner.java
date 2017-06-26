@@ -57,7 +57,8 @@ public class NeoSpinner extends ApplicationAdapter {
 		
 		//Graphics.clear(color) clears the screen
 		//Hue.fromHSB() creates a color from Hue, Saturation and Brightness values
-		Graphics.clear(Hue.fromHSB(time/90f, 1f, 1f));
+			//Graphics.clear(Hue.fromHSB(time/90f, 1f, 1f)); //rainbow background
+		Graphics.clear(Color.BLACK); //static black background
 		
 		batch.begin();
 		
