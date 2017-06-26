@@ -61,8 +61,16 @@ public class NeoSpinner extends ApplicationAdapter {
 		
 		batch.begin();
 		
-		batch.draw(img, playerx - img.getWidth()/2, playery - img.getHeight()/2, img.getWidth()/2, img.getHeight()/2,
-				img.getWidth(), img.getHeight(), 1f, 1f, time, 0, 0, img.getWidth(), img.getHeight(), false, false);
+		batch.draw(img, //texture 
+				playerx - img.getWidth()/2, //x 
+				playery - img.getHeight()/2, //y
+				img.getWidth()/2, img.getHeight()/2, //origin x and y
+				img.getWidth(), img.getHeight(), //width and height
+				1f, 1f, //scale x and y 
+				time, //rotation 
+				0, 0, //src x and y (if you want to draw part of the image)
+				img.getWidth(), img.getHeight(), //src Height and Width (same as above)
+				false, false); //flip x and y (bools)
 		
 		//set drawing color
 		batch.setColor(Color.GREEN);
