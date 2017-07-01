@@ -8,11 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 
 import io.anuke.ucore.core.Draw;
 import io.anuke.ucore.core.DrawContext;
 import io.anuke.ucore.core.Graphics;
-import io.anuke.ucore.util.Angles;
 import io.anuke.ucore.util.Mathf;
 
 public class NeoSpinner extends ApplicationAdapter {
@@ -20,8 +20,11 @@ public class NeoSpinner extends ApplicationAdapter {
 	Texture img;
 	
 	float speed = 10f;
-	float playerx, playery;
 	float time;
+	
+	static Array<Entity> entities = new Array<Entity>();
+	
+	Spinner player;
 	
 	@Override
 	public void create () {
@@ -33,41 +36,42 @@ public class NeoSpinner extends ApplicationAdapter {
 		//set the drawcontext font
 		DrawContext.font = new BitmapFont(Gdx.files.internal("fonts/font.fnt"));
 		
-		//set player position to center of screen
-		playerx = Gdx.graphics.getWidth()/2;
-		playery = Gdx.graphics.getHeight()/2;
+		player = new Spinner(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 	}
 
 	@Override
 	public void render () {
 		//input
 		if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)){
-			playery += speed*Mathf.delta();
+			player.y += speed*Mathf.delta();
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)){
-			playerx -= speed*Mathf.delta();
+			player.x -= speed*Mathf.delta();
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN)){
-			playery -= speed*Mathf.delta();
+			player.y -= speed*Mathf.delta();
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)){
-			playerx += speed*Mathf.delta();
+			player.x += speed*Mathf.delta();
 		}
 		
+		batch.begin();
+		
+		//update all the entities
+		for(Entity e: entities) {
+			e.draw(time);
+		}
+
 		//increment counter (fps-independent)
 		time += Mathf.delta();
 		
 		//Graphics.clear(color) clears the screen
-		//Hue.fromHSB() creates a color from Hue, Saturation and Brightness values
-			//Graphics.clear(Hue.fromHSB(time/90f, 1f, 1f)); //rainbow background
 		Graphics.clear(Color.BLACK); //static black background
 		
-		batch.begin();
-		
-		batch.draw(img, //texture 
+/*		batch.draw(img, //texture 
 				playerx - img.getWidth()/2, //x 
 				playery - img.getHeight()/2, //y
 				img.getWidth()/2, img.getHeight()/2, //origin x and y
@@ -77,29 +81,9 @@ public class NeoSpinner extends ApplicationAdapter {
 				0, 0, //src x and y (if you want to draw part of the image)
 				img.getWidth(), img.getHeight(), //src Height and Width (same as above)
 				false, false); //flip x and y (bools)
+*/		
 		
-		//set drawing color
-		batch.setColor(Color.GREEN);
-		
-		//sets line thickness to 5
-		Draw.thickness(5f);
-		
-		//draw a circle
-		Draw.circle(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f, 20f);
-		//draw 3-sided regular polygon
-		Draw.polygon(3, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2f, 50f);
-		//draw spikes around everything
-		Draw.spikes(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2f, 60f, 20f, 10, -time);
-		
-		int sides = 3;
-		
-		for(int i = 0; i < sides; i ++){
-			Angles.translation(i*360f/sides+time, 100);
-			Draw.circle(Gdx.graphics.getWidth()/2f + Angles.vector.x, Gdx.graphics.getHeight()/2f + Angles.vector.y, 60);
-		}
-		
-		batch.setColor(Color.WHITE);
-		
+		//draw fps
 		Draw.text(Gdx.graphics.getFramesPerSecond() + " FPS", 0, Gdx.graphics.getHeight(), Align.left);
 		
 		batch.end();
