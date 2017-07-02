@@ -60,8 +60,15 @@ public class NeoSpinner extends ApplicationAdapter {
 		if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)){
 			player.x += speed*Mathf.delta();
 		}
-		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
-			player.spinspeed += 0.1*Mathf.delta();
+		
+		//for holding
+		//if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+		//	player.spinspeed += 0.1*Mathf.delta();
+		//}
+		
+		//for spamming
+		if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+			player.spinspeed += 1;
 		}
 		
 		batch.begin();

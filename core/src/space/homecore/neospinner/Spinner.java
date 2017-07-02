@@ -12,6 +12,7 @@ public class Spinner extends Entity{
 	
 	float spinspeed = 0f;
 	private float rotation = 0;
+	float friction = 0.001f;
 	
 	private float time = 0;
 	
@@ -48,8 +49,10 @@ public class Spinner extends Entity{
 	
 	@Override
 	public void update() {
-time += Mathf.delta();
-		
+		time += Mathf.delta();
 		rotation += Mathf.delta()*spinspeed;
+		
+		spinspeed *= 1f-Mathf.delta()*friction;
+
 	}
 }
