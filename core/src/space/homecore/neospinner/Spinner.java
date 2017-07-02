@@ -4,10 +4,16 @@ import com.badlogic.gdx.graphics.Color;
 
 import io.anuke.ucore.core.Draw;
 import io.anuke.ucore.util.Angles;
+import io.anuke.ucore.util.Mathf;
 
 public class Spinner extends Entity{
 	Color color = Color.GREEN;
 	float thickness = 6f;
+	
+	float spinspeed = 0f;
+	private float rotation = 0;
+	
+	private float time = 0;
 	
 	public Spinner(float startx, float starty) {
 		x = startx;
@@ -24,7 +30,7 @@ public class Spinner extends Entity{
 	}
 
 	@Override
-	public void draw(float time) {		
+	public void draw() {
 		//draw a circle
 		Draw.circle(x, y, 20f);
 		//draw 3-sided regular polygon
@@ -35,8 +41,15 @@ public class Spinner extends Entity{
 		int sides = 3;
 		
 		for(int i = 0; i < sides; i ++){
-			Angles.translation(i*360f/sides+time*4, 100);
+			Angles.translation(i*360f/sides+rotation, 100);
 			Draw.circle(x + Angles.vector.x, y + Angles.vector.y, 60);
 		}
+	}
+	
+	@Override
+	public void update() {
+time += Mathf.delta();
+		
+		rotation += Mathf.delta()*spinspeed;
 	}
 }

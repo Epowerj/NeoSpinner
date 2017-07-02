@@ -41,6 +41,9 @@ public class NeoSpinner extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+		//increment counter (fps-independent)
+		time += Mathf.delta();
+		
 		//input
 		if(Gdx.input.isKeyPressed(Keys.W) || Gdx.input.isKeyPressed(Keys.UP)){
 			player.y += speed*Mathf.delta();
@@ -57,16 +60,17 @@ public class NeoSpinner extends ApplicationAdapter {
 		if(Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)){
 			player.x += speed*Mathf.delta();
 		}
+		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+			player.spinspeed += 0.1*Mathf.delta();
+		}
 		
 		batch.begin();
 		
 		//update all the entities
 		for(Entity e: entities) {
-			e.draw(time);
+			e.update();
+			e.draw();
 		}
-
-		//increment counter (fps-independent)
-		time += Mathf.delta();
 		
 		//Graphics.clear(color) clears the screen
 		Graphics.clear(Color.BLACK); //static black background

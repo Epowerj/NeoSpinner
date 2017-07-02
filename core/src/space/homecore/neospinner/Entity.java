@@ -4,7 +4,9 @@ public abstract class Entity {
 	float x;
 	float y;
 	
-	public abstract void draw(float time);
+	public abstract void draw();
+	
+	public abstract void update();
 	
 	public Entity() {
 		x = 0;
