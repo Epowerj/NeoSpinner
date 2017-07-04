@@ -11,6 +11,12 @@ public class DesktopLauncher {
 		//this disables vsync, so you get unlimited FPS
 		//comment out to enable vsync
 		config.useVsync(false);
+		//maximize it
+		config.setMaximized(true);
+		
+		//set the title
+		config.setTitle("N E O  S P I N N E R");
+		
 		new Lwjgl3Application(new NeoSpinner(), config);
 	}
 }

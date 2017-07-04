@@ -9,6 +9,10 @@ import io.anuke.ucore.util.Mathf;
 public class Spinner extends Entity{
 	Color color = Color.GREEN;
 	float thickness = 6f;
+	float length = 125;
+	float sideradius = 40;
+	float radius = 40f;
+	int sides = 3;
 	
 	float spinspeed = 0f;
 	private float rotation = 0;
@@ -33,20 +37,45 @@ public class Spinner extends Entity{
 	@Override
 	public void draw() {
 		//draw a circle
-		Draw.circle(x, y, 40f);
-		Draw.circle(x, y, 30f);
-		
-		//draw 3-sided regular polygon
-		//Draw.polygon(3, x, y, 50f);
-		//draw spikes around everything
-		//Draw.spikes(x, y, 60f, 20f, 10, -time);
-		
-		int sides = 3;
+		Draw.circle(x, y, radius);
+		Draw.circle(x, y, radius-17f);
 		
 		for(int i = 0; i < sides; i ++){
-			Angles.translation(i*360f/sides+rotation, 125);
-			Draw.circle(x + Angles.vector.x, y + Angles.vector.y, 40);
+			drawSide(i*360f/sides+rotation);
 		}
+	}
+	
+	void drawSide(float angle){
+		
+		for(int i = 0; i < 2; i ++){
+			//basically this makes sign 1, then -1, to draw both curves on the side of the spinner
+			int sign = Mathf.sign(i == 0);
+			
+			//end coords
+			Angles.translation(angle, length);
+			float endx = Angles.vector.x, endy = Angles.vector.y;
+			
+			//sides of the end circle
+			Angles.translation(angle+90*sign, sideradius);
+			float rightx = endx + Angles.vector.x, righty = endy + Angles.vector.y;
+			
+			//middle of the curve
+			float middlex = Angles.vector.x/2 + endx/2, middley = Angles.vector.y/2 + endy/2;
+			
+			//start of the curve, on the main circle
+			Angles.translation(angle+(360f/sides)/2f*sign, radius);
+			float rightdx = Angles.vector.x, rightdy = Angles.vector.y;
+			
+			//draw the curve
+			Draw.curve(rightx+x, righty+y, middlex+x, middley+y, middlex+x, middley+y, rightdx+x, rightdy+y, 10);
+		}
+		
+		//draw the actual ends of the side
+		Angles.translation(angle, length);
+		float endx = Angles.vector.x, endy = Angles.vector.y;
+		
+		Draw.circle(x + endx, y + endy, sideradius);
+		Draw.circle(x + endx, y + endy, sideradius/1.6f);
 	}
 	
 	@Override
