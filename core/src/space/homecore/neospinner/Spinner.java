@@ -33,17 +33,19 @@ public class Spinner extends Entity{
 	@Override
 	public void draw() {
 		//draw a circle
-		Draw.circle(x, y, 20f);
+		Draw.circle(x, y, 40f);
+		Draw.circle(x, y, 30f);
+		
 		//draw 3-sided regular polygon
-		Draw.polygon(3, x, y, 50f);
+		//Draw.polygon(3, x, y, 50f);
 		//draw spikes around everything
-		Draw.spikes(x, y, 60f, 20f, 10, -time);
+		//Draw.spikes(x, y, 60f, 20f, 10, -time);
 		
 		int sides = 3;
 		
 		for(int i = 0; i < sides; i ++){
-			Angles.translation(i*360f/sides+rotation, 100);
-			Draw.circle(x + Angles.vector.x, y + Angles.vector.y, 60);
+			Angles.translation(i*360f/sides+rotation, 125);
+			Draw.circle(x + Angles.vector.x, y + Angles.vector.y, 40);
 		}
 	}
 	
