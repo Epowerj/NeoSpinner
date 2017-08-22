@@ -1,3 +1,5 @@
+//Fidget spinner entity. How the fidget spinner behaves.
+
 package space.homecore.neospinner;
 
 import com.badlogic.gdx.graphics.Color;
