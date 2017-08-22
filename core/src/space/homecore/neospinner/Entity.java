@@ -13,13 +13,13 @@ public abstract class Entity {
 		y = 0;
 		
 		//add this entity to the list
-		NeoSpinner.entities.add(this);
+		NeoSpinner.instance.entities.add(this);
 	}
 	public Entity(float settoX, float settoY) {
 		x = settoX;
 		y = settoY;
 		
 		//add this entity to the list
-		NeoSpinner.entities.add(this);
+		NeoSpinner.instance.entities.add(this);
 	}
 }
