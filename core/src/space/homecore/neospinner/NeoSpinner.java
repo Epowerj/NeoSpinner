@@ -1,3 +1,5 @@
+//Starts the game and adds essential controls
+
 package space.homecore.neospinner;
 
 import com.badlogic.gdx.ApplicationAdapter;
