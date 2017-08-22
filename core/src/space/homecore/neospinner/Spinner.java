@@ -25,7 +25,7 @@ public class Spinner extends Entity{
 		y = starty;
 		
 		//add this entity to the list
-		NeoSpinner.entities.add(this);
+		NeoSpinner.instance.entities.add(this);
 		
 		//set drawing color
 		Draw.color(color);

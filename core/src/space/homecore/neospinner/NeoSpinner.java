@@ -18,18 +18,24 @@ import io.anuke.ucore.core.Graphics;
 import io.anuke.ucore.util.Mathf;
 
 public class NeoSpinner extends ApplicationAdapter {
+	
+	//a static reference to the one and only neospinner
+	static NeoSpinner instance;
+	
 	SpriteBatch batch;
 	Texture img;
 	
 	float speed = 10f;
 	float time;
 	
-	static Array<Entity> entities = new Array<Entity>();
+	Array<Entity> entities = new Array<Entity>();
 	
 	Spinner player;
 	
 	@Override
 	public void create () {
+		instance = this; //set reference to this object
+		
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		
