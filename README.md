@@ -1,2 +1,2 @@
 # NeoSpinner
-A gripping tale of internal struggle.
+A simple "game" using libjdx and java.
